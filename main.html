@@ -15,6 +15,7 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
+      cursor: pointer;
     }
 
     h1 {
@@ -48,7 +49,7 @@
       border-radius: 50%;
       width: 50px;
       height: 50px;
-      animation: spin 1s linear infinite;
+      animation: spin 2s linear infinite;
       display: none;
       margin-top: 20px;
     }
@@ -67,7 +68,6 @@
       background: conic-gradient(#3498db 0% 120deg, #27ae60 120deg 240deg, #e74c3c 240deg 360deg);
       position: absolute;
       clip-path: polygon(50% 50%, 0% 0%, 0% 100%);
-      animation: spin 2s linear infinite;
     }
 
     .participant-label {
@@ -104,7 +104,7 @@
   <button id="button" onclick="losujUczestnika()">Losuj Uczestnika</button>
   <div id="loader"></div>
   <div id="result"></div>
-  <div class="wheel-container">
+  <div class="wheel-container" onclick="losujUczestnika()">
     <div class="wheel">
       <div class="participant-label">P. Marek</div>
       <div class="participant-label">Hania</div>
@@ -117,6 +117,7 @@
       const button = document.getElementById('button');
       const loader = document.getElementById('loader');
       const resultElement = document.getElementById('result');
+      const wheel = document.querySelector('.wheel');
 
       button.style.display = 'none';
       loader.style.display = 'block';
@@ -140,4 +141,26 @@
 
       for (let i = 0; i < uczestnicy.length; i++) {
         suma += szanse[i];
-        if (losowaLicz
+        if (losowaLiczba <= suma) {
+          wybranyUczestnik = uczestnicy[i];
+          break;
+        }
+      }
+
+      // Obrót koła w kierunku wybranego uczestnika
+      const stopnie = 360 - (uczestnicy.indexOf(wybranyUczestnik) * 120);
+      wheel.style.transition = 'transform 3s ease-out';
+      wheel.style.transform = `rotate(${stopnie}deg)`;
+
+      // Opóźnienie dla celów animacyjnych
+      setTimeout(function() {
+        button.style.display = 'block';
+        loader.style.display = 'none';
+        resultElement.textContent = `Wybrany uczestnik: ${wybranyUczestnik}`;
+        wheel.style.transition = 'none';
+        wheel.style.transform = 'rotate(0deg)';
+      }, 3000); // 3000 milisekund (3 sekundy) opóźnienia
+    }
+  </script>
+</body>
+</html>
