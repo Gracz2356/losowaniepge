@@ -53,25 +53,34 @@
       margin-top: 20px;
     }
 
+    .wheel-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin-top: 20px;
+    }
+
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      clip-path: polygon(50% 50%, 0% 0%, 0% 100%);
+      background: conic-gradient(#3498db 0% 120deg, #27ae60 120deg 240deg, #e74c3c 240deg 360deg);
+      position: absolute;
+    }
+
+    .participant-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 14px;
+    }
+
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-    }
-
-    /* Stylizacja dla równych szans wizualnie */
-    .participant {
-      display: inline-block;
-      margin: 0 10px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .participant:nth-child(1) {
-      color: #3498db;
-    }
-
-    .participant:nth-child(2) {
-      color: #3498db;
     }
   </style>
 </head>
@@ -80,6 +89,13 @@
   <button id="button" onclick="losujUczestnika()">Losuj Uczestnika</button>
   <div id="loader"></div>
   <div id="result"></div>
+  <div class="wheel-container">
+    <div class="wheel">
+      <div class="participant-label">P. Marek</div>
+      <div class="participant-label">Hania</div>
+      <div class="participant-label">Karol</div>
+    </div>
+  </div>
 
   <script>
     function losujUczestnika() {
@@ -92,10 +108,10 @@
       resultElement.textContent = '';
 
       // Uczestnicy
-      const uczestnicy = ['Uczestnik 1', 'Uczestnik 2', 'Uczestnik 3'];
+      const uczestnicy = ['P. Marek', 'Hania', 'Karol'];
 
       // Równe szanse dla każdego uczestnika
-      const szanse = [0, 0, 100];
+      const szanse = [1, 1, 1];
 
       // Suma szans
       const sumaSzanse = szanse.reduce((a, b) => a + b, 0);
