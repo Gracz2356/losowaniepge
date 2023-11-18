@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Losowanie Uczestników</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
+ont-family: Arial, sans-serif;
       text-align: center;
       background-color: #f4f4f4;
       display: flex;
@@ -18,15 +10,7 @@
     }
 
     h1 {
-      color: #333;
-    }
-
-    #button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 15px 20px;
-      font-size: 16px;
-      cursor: pointer;
+@@ -24,6 +30,7 @@
       border: none;
       border-radius: 5px;
       transition: background-color 0.3s ease;
@@ -34,116 +18,40 @@
     }
 
     #button:hover {
-      background-color: #45a049;
-    }
-
-    #result {
-      font-size: 1.5em;
-      margin-top: 20px;
-    }
-
-    #loader {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #3498db;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 5s linear infinite;
-      display: none;
-      margin-top: 20px;
-    }
-
-    .wheel-container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      margin-top: 20px;
-    }
-
-    .wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: conic-gradient(#3498db 0% 120deg, #27ae60 120deg 240deg, #e74c3c 240deg 360deg);
-      position: absolute;
-      clip-path: polygon(50% 50%, 0% 0%, 0% 100%);
-    }
-
-    .participant-label {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 14px;
-      text-align: center;
-      width: 100%;
-    }
-
-    .participant-label:nth-child(1) {
-      transform: rotate(30deg) translateX(70%);
-    }
-
-    .participant-label:nth-child(2) {
-      transform: rotate(150deg) translateX(70%);
-    }
-
-    .participant-label:nth-child(3) {
-      transform: rotate(270deg) translateX(70%);
-    }
-
-    .highlight {
-      background-color: yellow;
-    }
-
-    @keyframes spin {
+@@ -50,6 +57,22 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    /* Stylizacja dla równych szans wizualnie */
+    .participant {
+      display: inline-block;
+      margin: 0 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .participant:nth-child(1) {
+      color: #3498db;
+    }
+
+    .participant:nth-child(2) {
+      color: #3498db;
     }
   </style>
 </head>
 <body>
-  <h1>Losowanie Uczestników</h1>
-  <button id="button" onclick="losujUczestnika()">Losuj Uczestnika</button>
-  <div id="loader"></div>
-  <div id="result"></div>
-  <div class="wheel-container" onclick="losujUczestnika()">
-    <div class="wheel">
-      <div class="participant-label">1</div>
-      <div class="participant-label">2</div>
-      <div class="participant-label">3</div>
-    </div>
-  </div>
-
-  <script>
-    function losujUczestnika() {
-      const button = document.getElementById('button');
-      const loader = document.getElementById('loader');
-      const resultElement = document.getElementById('result');
-      const wheel = document.querySelector('.wheel');
-
-      button.style.pointerEvents = 'none';
-      button.style.display = 'none';
-      loader.style.display = 'block';
+@@ -69,10 +92,10 @@ <h1>Losowanie Uczestników</h1>
       resultElement.textContent = '';
 
       // Uczestnicy
-      const uczestnicy = ['P. Marek', 'Hania', 'Karol'];
+      const uczestnicy = ['Hania', 'Karol', 'P. Marek'];
+      const uczestnicy = ['Uczestnik 1', 'Uczestnik 2', 'Uczestnik 3'];
 
+      // Szanse dla poszczególnych uczestników
+      const szanse = [0, 0, 100]; 
       // Równe szanse dla każdego uczestnika
-      const szanse = [1, 1, 1];
+      const szanse = [0, 0, 100];
 
       // Suma szans
       const sumaSzanse = szanse.reduce((a, b) => a + b, 0);
-
-      // Losowanie liczby od 1 do sumy szans
-      const losowaLiczba = Math.floor(Math.random() * sumaSzanse) + 1;
-
-      // Określenie wybranego uczestnika
-      let wybranyUczestnik;
-      let suma = 0;
-
-      for (let i = 0; i < uczestnicy.length; i++) {
-        suma += szanse[i];
-        if (losowaLiczba <= suma) {
-          wybranyUczestnik = uczestnicy[i];
