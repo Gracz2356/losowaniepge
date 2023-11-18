@@ -65,7 +65,6 @@
       height: 100%;
       border-radius: 50%;
       clip-path: polygon(50% 50%, 0% 0%, 0% 100%);
-      background: conic-gradient(#3498db 0% 120deg, #27ae60 120deg 240deg, #e74c3c 240deg 360deg);
       position: absolute;
     }
 
@@ -76,6 +75,21 @@
       transform: translate(-50%, -50%);
       color: white;
       font-size: 14px;
+    }
+
+    .sector1 {
+      background: #3498db;
+      transform: rotate(0deg);
+    }
+
+    .sector2 {
+      background: #27ae60;
+      transform: rotate(120deg);
+    }
+
+    .sector3 {
+      background: #e74c3c;
+      transform: rotate(240deg);
     }
 
     @keyframes spin {
@@ -91,9 +105,9 @@
   <div id="result"></div>
   <div class="wheel-container">
     <div class="wheel">
-      <div class="participant-label">P. Marek</div>
-      <div class="participant-label">Hania</div>
-      <div class="participant-label">Karol</div>
+      <div class="participant-label sector1">P. Marek</div>
+      <div class="participant-label sector2">Hania</div>
+      <div class="participant-label sector3">Karol</div>
     </div>
   </div>
 
