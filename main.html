@@ -140,19 +140,4 @@
 
       for (let i = 0; i < uczestnicy.length; i++) {
         suma += szanse[i];
-        if (losowaLiczba <= suma) {
-          wybranyUczestnik = uczestnicy[i];
-          break;
-        }
-      }
-
-      // Opóźnienie dla celów animacyjnych
-      setTimeout(function() {
-        button.style.display = 'block';
-        loader.style.display = 'none';
-        resultElement.textContent = `Wybrany uczestnik: ${wybranyUczestnik}`;
-      }, 1500); // 1500 milisekund (1.5 sekundy) opóźnienia
-    }
-  </script>
-</body>
-</html>
+        if (losowaLicz
