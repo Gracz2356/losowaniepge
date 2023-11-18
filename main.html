@@ -64,8 +64,10 @@
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      clip-path: polygon(50% 50%, 0% 0%, 0% 100%);
+      background: conic-gradient(#3498db 0% 120deg, #27ae60 120deg 240deg, #e74c3c 240deg 360deg);
       position: absolute;
+      clip-path: polygon(50% 50%, 0% 0%, 0% 100%);
+      animation: spin 2s linear infinite;
     }
 
     .participant-label {
@@ -75,21 +77,20 @@
       transform: translate(-50%, -50%);
       color: white;
       font-size: 14px;
+      text-align: center;
+      width: 100%;
     }
 
-    .sector1 {
-      background: #3498db;
-      transform: rotate(0deg);
+    .participant-label:nth-child(1) {
+      transform: rotate(30deg) translateX(70%);
     }
 
-    .sector2 {
-      background: #27ae60;
-      transform: rotate(120deg);
+    .participant-label:nth-child(2) {
+      transform: rotate(150deg) translateX(70%);
     }
 
-    .sector3 {
-      background: #e74c3c;
-      transform: rotate(240deg);
+    .participant-label:nth-child(3) {
+      transform: rotate(270deg) translateX(70%);
     }
 
     @keyframes spin {
@@ -105,9 +106,9 @@
   <div id="result"></div>
   <div class="wheel-container">
     <div class="wheel">
-      <div class="participant-label sector1">P. Marek</div>
-      <div class="participant-label sector2">Hania</div>
-      <div class="participant-label sector3">Karol</div>
+      <div class="participant-label">P. Marek</div>
+      <div class="participant-label">Hania</div>
+      <div class="participant-label">Karol</div>
     </div>
   </div>
 
