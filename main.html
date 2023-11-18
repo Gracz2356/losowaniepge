@@ -1,57 +1,104 @@
-ont-family: Arial, sans-serif;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Losowanie Uczestników</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
       text-align: center;
       background-color: #f4f4f4;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
     }
 
     h1 {
-@@ -24,6 +30,7 @@
+      color: #333;
+    }
+
+    #button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px 20px;
+      font-size: 16px;
+      cursor: pointer;
       border: none;
       border-radius: 5px;
       transition: background-color 0.3s ease;
-      margin-top: 20px;
     }
 
     #button:hover {
-@@ -50,6 +57,22 @@
+      background-color: #45a049;
+    }
+
+    #result {
+      font-size: 1.5em;
+      margin-top: 20px;
+    }
+
+    #loader {
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin-top: 20px;
+    }
+
+    @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
-    }
-
-    /* Stylizacja dla równych szans wizualnie */
-    .participant {
-      display: inline-block;
-      margin: 0 10px;
-      font-size: 14px;
-      color: #555;
-    }
-
-    .participant:nth-child(1) {
-      color: #3498db;
-    }
-
-    .participant:nth-child(2) {
-      color: #3498db;
     }
   </style>
 </head>
 <body>
-@@ -69,10 +92,10 @@ <h1>Losowanie Uczestników</h1>
+  <h1>Losowanie Uczestników</h1>
+  <button id="button" onclick="losujUczestnika()">Losuj Uczestnika</button>
+  <div id="loader"></div>
+  <div id="result"></div>
+
+  <script>
+    function losujUczestnika() {
+      const button = document.getElementById('button');
+      const loader = document.getElementById('loader');
+      const resultElement = document.getElementById('result');
+
+      button.style.display = 'none';
+      loader.style.display = 'block';
       resultElement.textContent = '';
 
       // Uczestnicy
       const uczestnicy = ['Hania', 'Karol', 'P. Marek'];
-      const uczestnicy = ['Uczestnik 1', 'Uczestnik 2', 'Uczestnik 3'];
 
       // Szanse dla poszczególnych uczestników
       const szanse = [0, 0, 100]; 
-      // Równe szanse dla każdego uczestnika
-      const szanse = [0, 0, 100];
 
       // Suma szans
       const sumaSzanse = szanse.reduce((a, b) => a + b, 0);
+
+      // Losowanie liczby od 1 do sumy szans
+      const losowaLiczba = Math.floor(Math.random() * sumaSzanse) + 1;
+
+      // Określenie wybranego uczestnika
+      let wybranyUczestnik;
+      let suma = 0;
+
+      for (let i = 0; i < uczestnicy.length; i++) {
+        suma += szanse[i];
+        if (losowaLiczba <= suma) {
+          wybranyUczestnik = uczestnicy[i];
+          break;
+        }
+      }
+
+      // Opóźnienie dla celów animacyjnych
+      setTimeout(function() {
+        button.style.display = 'block';
+        loader.style.display = 'none';
+        resultElement.textContent = `Wybrany uczestnik: ${wybranyUczestnik}`;
+      }, 1500); // 1500 milisekund (1.5 sekundy) opóźnienia
+    }
+  </script>
+</body>
+</html>
